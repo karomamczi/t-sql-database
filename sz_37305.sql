@@ -123,5 +123,9 @@ VALUES
 ('20030126', 7, 6, 7, 0, GETDATE())
 
 ALTER TABLE Euref.Station ADD CONSTRAINT PK_Station PRIMARY KEY (StationId)
-
+ALTER TABLE Euref.StationConfiguration ADD CONSTRAINT PK_StationConfiguration PRIMARY KEY (StationId)
+ALTER TABLE Euref.TrackSystem ADD CONSTRAINT PK_TrackSystem PRIMARY KEY (StationId)
+ALTER TABLE Euref.Institution ADD CONSTRAINT PK_Institution PRIMARY KEY (OperatingInstitutionId)
+ALTER TABLE Euref.Receiver ADD CONSTRAINT PK_Receiver PRIMARY KEY (ReceiverId)
+ALTER TABLE Euref.Antenna ADD CONSTRAINT PK_Antenna PRIMARY KEY (AntennaId)
 
