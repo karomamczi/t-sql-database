@@ -129,3 +129,17 @@ ALTER TABLE Euref.Institution ADD CONSTRAINT PK_Institution PRIMARY KEY (Operati
 ALTER TABLE Euref.Receiver ADD CONSTRAINT PK_Receiver PRIMARY KEY (ReceiverId)
 ALTER TABLE Euref.Antenna ADD CONSTRAINT PK_Antenna PRIMARY KEY (AntennaId)
 
+ALTER TABLE Euref.StationConfiguration 
+ADD CONSTRAINT FK_OperatingInstitution_OperatingInstitutionId 
+FOREIGN KEY (OperatingInstitutionId)
+REFERENCES Euref.Institution (OperatingInstitutionId)
+
+ALTER TABLE Euref.StationConfiguration 
+ADD CONSTRAINT FK_Receiver_ReceiverId
+FOREIGN KEY (ReceiverId)
+REFERENCES Euref.Receiver (ReceiverId)
+
+ALTER TABLE Euref.StationConfiguration 
+ADD CONSTRAINT FK_Antenna_AntennaId
+FOREIGN KEY (AntennaId)
+REFERENCES Euref.Antenna (AntennaId)
