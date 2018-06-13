@@ -167,3 +167,11 @@ SELECT Name, Country FROM Euref.Institution
 ORDER BY Country DESC
 
 SELECT DISTINCT Country FROM Euref.Institution
+
+SELECT
+  PostalCode,
+  CASE
+	WHEN CHARINDEX('-', PostalCode) = 0 THEN PostalCode
+	ELSE SUBSTRING(PostalCode, 1, CHARINDEX('-', PostalCode)-1) + SUBSTRING(PostalCode, CHARINDEX('-', PostalCode)+1, LEN(PostalCode))
+  END AS NoDashPostalCode
+FROM Euref.Institution
