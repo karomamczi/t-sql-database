@@ -71,7 +71,7 @@ VALUES
 ('KRA100POL', 'Krakow', 'Poland', 50.0661, 19.9204, 267.1, GETDATE()),
 ('KRAW00POL', 'Krakow', 'Poland', 50.0661, 19.9205, 267.3, GETDATE())
 
-INSERT INTO	Euref.TrackSystem (TrackGps, TrackGlo, TrackGal, TrackBds, ModifiedDate)
+INSERT INTO Euref.TrackSystem (TrackGps, TrackGlo, TrackGal, TrackBds, ModifiedDate)
 VALUES
 (1, 1, 1, 1, GETDATE()),
 (1, 1, 0, 0, GETDATE()),
