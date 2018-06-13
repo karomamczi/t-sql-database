@@ -158,3 +158,7 @@ SELECT
   Height AS Wysokoœæ,
   ModifiedDate AS [Data modyfikacji]
 FROM Euref.Station
+
+
+UPDATE Euref.TrackSystem SET ModifiedDate = GETDATE() WHERE StationId > 1 AND StationId < 5
+SELECT * FROM Euref.TrackSystem
