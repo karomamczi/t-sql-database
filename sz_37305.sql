@@ -166,3 +166,4 @@ SELECT * FROM Euref.TrackSystem
 SELECT Name, Country FROM Euref.Institution
 ORDER BY Country DESC
 
+SELECT DISTINCT Country FROM Euref.Institution
