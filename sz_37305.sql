@@ -162,3 +162,7 @@ FROM Euref.Station
 
 UPDATE Euref.TrackSystem SET ModifiedDate = GETDATE() WHERE StationId > 1 AND StationId < 5
 SELECT * FROM Euref.TrackSystem
+
+SELECT Name, Country FROM Euref.Institution
+ORDER BY Country DESC
+
