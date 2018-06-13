@@ -56,8 +56,12 @@ CREATE TABLE Euref.Receiver (
 CREATE TABLE Euref.Antenna (
   AntennaId int IDENTITY NOT NULL,
   Name nvarchar(50),
-  ModifiedDate datetime
+  ModifiedDate datetime,
+  DummyColumn money
 )
+
+ALTER TABLE Euref.Antenna
+DROP COLUMN DummyColumn
 
 
 INSERT INTO Euref.Station (Name, City, Country, Latitude, Longitude, Height, ModifiedDate)
@@ -143,3 +147,14 @@ ALTER TABLE Euref.StationConfiguration
 ADD CONSTRAINT FK_Antenna_AntennaId
 FOREIGN KEY (AntennaId)
 REFERENCES Euref.Antenna (AntennaId)
+
+SELECT 
+  StationId AS [Identyfikator stacji],
+  Name AS Nazwa,
+  City AS Miasto,
+  Country AS Pañstwo,
+  Latitude AS [Szerokoœæ geograficzna],
+  Longitude AS [D³ugoœæ geograficzna],
+  Height AS Wysokoœæ,
+  ModifiedDate AS [Data modyfikacji]
+FROM Euref.Station
