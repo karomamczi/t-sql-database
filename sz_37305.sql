@@ -175,3 +175,6 @@ SELECT
 	ELSE SUBSTRING(PostalCode, 1, CHARINDEX('-', PostalCode)-1) + SUBSTRING(PostalCode, CHARINDEX('-', PostalCode)+1, LEN(PostalCode))
   END AS NoDashPostalCode
 FROM Euref.Institution
+
+SELECT StationId, IntegrationDate FROM Euref.StationConfiguration
+WHERE IntegrationDate BETWEEN '1995-01-01' AND '2005-01-01'
