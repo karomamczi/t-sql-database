@@ -148,6 +148,9 @@ ADD CONSTRAINT FK_Antenna_AntennaId
 FOREIGN KEY (AntennaId)
 REFERENCES Euref.Antenna (AntennaId)
 
+ALTER TABLE Euref.StationConfiguration 
+ADD CONSTRAINT CK_StationConfiguration_ValidIntegrationDate CHECK (IntegrationDate <= GETDATE())
+
 SELECT 
   StationId AS [Identyfikator stacji],
   Name AS Nazwa,
