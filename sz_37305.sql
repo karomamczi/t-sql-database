@@ -43,13 +43,13 @@ CREATE TABLE Euref.Institution (
   AddressLine nvarchar(200),
   PostalCode nvarchar(20),
   City nvarchar(50),
-  Country nvarchar(50),	
+  Country nvarchar(50),
   ModifiedDate datetime
 )
 
 CREATE TABLE Euref.Receiver (
   ReceiverId int IDENTITY NOT NULL,
-  Name nvarchar(50),	
+  Name nvarchar(50),
   ModifiedDate datetime
 )
 
@@ -65,7 +65,7 @@ DROP COLUMN DummyColumn
 
 
 INSERT INTO Euref.Station (Name, City, Country, Latitude, Longitude, Height, ModifiedDate)
-VALUES 
+VALUES
 ('AUTN00FRA', 'Autun', 'France', 46.9538, 4.2890, 353.0, GETDATE()),
 ('BPDL00POL', 'Biala Podlaska', 'Poland', 52.0352, 23.1273, 196.8, GETDATE()),
 ('CASE00ESP', 'Cassa de la Selva', 'Spain', 41.8828, 2.9042, 250.6, GETDATE()),
@@ -88,7 +88,7 @@ VALUES
 
 INSERT INTO Euref.Institution (Name, Acronym, AddressLine, PostalCode, City, Country, ModifiedDate)
 VALUES
-('Institut National de l''Information Geographique et Forestiere', 'IGN_RGP', 'avenue de Paris 73', '94165', 'Saint-Mandé', 'France', GETDATE()),
+('Institut National de l''Information Geographique et Forestiere', 'IGN_RGP', 'avenue de Paris 73', '94165', 'Saint-Mandï¿½', 'France', GETDATE()),
 ('ASG-EUPOS Management Center in Warsaw Head Office of Geodesy and Cartography', 'ASGEUPOS', 'Wspolna 2', '00-926', 'Warsaw', 'Poland', GETDATE()),
 ('Institut Cartografic i Geologic de Catalunya', 'ICGC', 'Parc de Montjuic', 'E-08038', 'Barcelona', 'Spain', GETDATE()),
 ('Royal Observatory of Belgium', 'ROB', 'avenue Circulaire 3', 'B-1180', 'Brussels', 'Belgium', GETDATE()),
@@ -116,7 +116,7 @@ VALUES
 ('ASH701945C_M SNOW', GETDATE())
 
 INSERT INTO Euref.StationConfiguration (IntegrationDate, OperatingInstitutionId, ReceiverId, AntennaId, IndividualCalibration, ModifiedDate)
-VALUES 
+VALUES
 ('20050703', 1, 1, 1, 0, GETDATE()),
 ('20080608', 2, 2, 2, 1, GETDATE()),
 ('20160703', 3, 3, 3, 1, GETDATE()),
@@ -133,32 +133,32 @@ ALTER TABLE Euref.Institution ADD CONSTRAINT PK_Institution PRIMARY KEY (Operati
 ALTER TABLE Euref.Receiver ADD CONSTRAINT PK_Receiver PRIMARY KEY (ReceiverId)
 ALTER TABLE Euref.Antenna ADD CONSTRAINT PK_Antenna PRIMARY KEY (AntennaId)
 
-ALTER TABLE Euref.StationConfiguration 
-ADD CONSTRAINT FK_OperatingInstitution_OperatingInstitutionId 
+ALTER TABLE Euref.StationConfiguration
+ADD CONSTRAINT FK_OperatingInstitution_OperatingInstitutionId
 FOREIGN KEY (OperatingInstitutionId)
 REFERENCES Euref.Institution (OperatingInstitutionId)
 
-ALTER TABLE Euref.StationConfiguration 
+ALTER TABLE Euref.StationConfiguration
 ADD CONSTRAINT FK_Receiver_ReceiverId
 FOREIGN KEY (ReceiverId)
 REFERENCES Euref.Receiver (ReceiverId)
 
-ALTER TABLE Euref.StationConfiguration 
+ALTER TABLE Euref.StationConfiguration
 ADD CONSTRAINT FK_Antenna_AntennaId
 FOREIGN KEY (AntennaId)
 REFERENCES Euref.Antenna (AntennaId)
 
-ALTER TABLE Euref.StationConfiguration 
+ALTER TABLE Euref.StationConfiguration
 ADD CONSTRAINT CK_StationConfiguration_ValidIntegrationDate CHECK (IntegrationDate <= GETDATE())
 
-SELECT 
+SELECT
   StationId AS [Identyfikator stacji],
   Name AS Nazwa,
   City AS Miasto,
-  Country AS Pañstwo,
-  Latitude AS [Szerokoœæ geograficzna],
-  Longitude AS [D³ugoœæ geograficzna],
-  Height AS Wysokoœæ,
+  Country AS Panstwo,
+  Latitude AS [Szerokosc geograficzna],
+  Longitude AS [Dlugosc geograficzna],
+  Height AS Wysokosc,
   ModifiedDate AS [Data modyfikacji]
 FROM Euref.Station
 
@@ -174,19 +174,19 @@ SELECT DISTINCT Country FROM Euref.Institution
 SELECT
   PostalCode,
   CASE
-	WHEN CHARINDEX('-', PostalCode) = 0 THEN PostalCode
-	ELSE SUBSTRING(PostalCode, 1, CHARINDEX('-', PostalCode)-1) + SUBSTRING(PostalCode, CHARINDEX('-', PostalCode)+1, LEN(PostalCode))
+    WHEN CHARINDEX('-', PostalCode) = 0 THEN PostalCode
+    ELSE SUBSTRING(PostalCode, 1, CHARINDEX('-', PostalCode)-1) + SUBSTRING(PostalCode, CHARINDEX('-', PostalCode)+1, LEN(PostalCode))
   END AS NoDashPostalCode
 FROM Euref.Institution
 
 SELECT StationId, IntegrationDate FROM Euref.StationConfiguration
 WHERE IntegrationDate BETWEEN '1995-01-01' AND '2005-01-01'
 
-SELECT 
+SELECT
   s.Name AS StationName,
   r.Name AS ReceiverName
 FROM Euref.StationConfiguration AS sc
-JOIN Euref.Station AS s 
+JOIN Euref.Station AS s
 ON sc.StationId = s.StationId
 JOIN Euref.Receiver AS r
 ON sc.ReceiverId = r.ReceiverId
@@ -195,7 +195,7 @@ GO
 
 CREATE VIEW Euref.vStationReceiverAntenna
 AS
-SELECT 
+SELECT
   sc.StationId,
   r.Name AS ReceiverName,
   a.Name AS AntennaName
@@ -211,7 +211,7 @@ GO
 
 CREATE VIEW Euref.vTrackedSystemsTotalForStation
 AS
-SELECT 
+SELECT
  StationId,
  CONVERT(int,TrackGps) + CONVERT(int,TrackGlo) + CONVERT(int,TrackGal) + CONVERT(int,TrackBds) AS TrackedSystemsTotal
 FROM Euref.TrackSystem
