@@ -181,3 +181,14 @@ FROM Euref.Institution
 
 SELECT StationId, IntegrationDate FROM Euref.StationConfiguration
 WHERE IntegrationDate BETWEEN '1995-01-01' AND '2005-01-01'
+
+SELECT 
+  s.Name AS StationName,
+  r.Name AS ReceiverName
+FROM Euref.StationConfiguration as sc
+JOIN Euref.Station AS s 
+ON sc.StationId = s.StationId
+JOIN Euref.Receiver AS r
+ON sc.ReceiverId = r.ReceiverId
+WHERE r.Name LIKE 'LEICA%'
+
