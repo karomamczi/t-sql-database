@@ -228,6 +228,7 @@ SELECT
   COUNT(TrackedSystemsTotal) AS CountOfSystems
 FROM Euref.vTrackedSystemsTotalForStation
 GROUP BY TrackedSystemsTotal
+HAVING COUNT(TrackedSystemsTotal) > 2
 ORDER BY TrackedSystemsTotal DESC
 
 SELECT
@@ -242,3 +243,10 @@ JOIN Euref.Institution AS i
 ON sc.OperatingInstitutionId = i.OperatingInstitutionId
 JOIN Euref.Station AS s
 ON sc.StationId = s.StationId
+
+SELECT
+  StationId,
+  Name,
+  Height
+FROM Euref.Station
+WHERE Height >= 300
