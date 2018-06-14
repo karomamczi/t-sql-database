@@ -208,3 +208,24 @@ GO
 
 SELECT * FROM Euref.vStationReceiverAntenna
 GO
+
+CREATE VIEW Euref.vTrackedSystemsTotalForStation
+AS
+SELECT 
+ StationId,
+ CONVERT(int,TrackGps) + CONVERT(int,TrackGlo) + CONVERT(int,TrackGal) + CONVERT(int,TrackBds) AS TrackedSystemsTotal
+FROM Euref.TrackSystem
+GO
+
+SELECT
+  MIN(TrackedSystemsTotal) AS MinTrackedSystemsTotal,
+  MAX(TrackedSystemsTotal) AS MaxTrackedSystemsTotal,
+  AVG(TrackedSystemsTotal) AS AvgTrackedSystemsTotal
+FROM Euref.vTrackedSystemsTotalForStation
+
+SELECT
+  TrackedSystemsTotal,
+  COUNT(TrackedSystemsTotal) AS CountOfSystems
+FROM Euref.vTrackedSystemsTotalForStation
+GROUP BY TrackedSystemsTotal
+ORDER BY TrackedSystemsTotal DESC
