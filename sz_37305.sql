@@ -185,10 +185,26 @@ WHERE IntegrationDate BETWEEN '1995-01-01' AND '2005-01-01'
 SELECT 
   s.Name AS StationName,
   r.Name AS ReceiverName
-FROM Euref.StationConfiguration as sc
+FROM Euref.StationConfiguration AS sc
 JOIN Euref.Station AS s 
 ON sc.StationId = s.StationId
 JOIN Euref.Receiver AS r
 ON sc.ReceiverId = r.ReceiverId
 WHERE r.Name LIKE 'LEICA%'
+GO
 
+CREATE VIEW Euref.vStationReceiverAntenna
+AS
+SELECT 
+  sc.StationId,
+  r.Name AS ReceiverName,
+  a.Name AS AntennaName
+FROM Euref.StationConfiguration AS sc
+JOIN Euref.Receiver AS r
+ON sc.ReceiverId = r.ReceiverId
+JOIN Euref.Antenna AS a
+ON sc.AntennaId = a.AntennaId
+GO
+
+SELECT * FROM Euref.vStationReceiverAntenna
+GO
