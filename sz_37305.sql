@@ -229,3 +229,16 @@ SELECT
 FROM Euref.vTrackedSystemsTotalForStation
 GROUP BY TrackedSystemsTotal
 ORDER BY TrackedSystemsTotal DESC
+
+SELECT
+  s.City AS StationCity,
+  i.City AS OperatingInstitutionCity,
+  CASE
+    WHEN s.City = i.City THEN 'YES'
+    ELSE 'NO'
+  END AS EqualCity
+FROM Euref.StationConfiguration AS sc
+JOIN Euref.Institution AS i
+ON sc.OperatingInstitutionId = i.OperatingInstitutionId
+JOIN Euref.Station AS s
+ON sc.StationId = s.StationId
